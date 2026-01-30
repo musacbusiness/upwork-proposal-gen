@@ -1,0 +1,91 @@
+{
+  "budget": {
+    "min": 0,
+    "max": 100000,
+    "note": "No-code projects vary widely in budget"
+  },
+  "client_rating": {
+    "min": 0,
+    "note": "Accept new clients too - they often pay well"
+  },
+  "client_reviews": {
+    "min": 0,
+    "note": "New clients welcome"
+  },
+  "job_category": [],
+  "skills_required": [
+    "Zapier",
+    "Make.com",
+    "Make",
+    "Integromat",
+    "n8n",
+    "No-Code",
+    "No Code",
+    "Automation",
+    "API Integration",
+    "Workflow Automation",
+    "Business Automation",
+    "Process Automation"
+  ],
+  "skills_match_mode": "any",
+  "title_keywords": [
+    "zapier",
+    "make.com",
+    "make",
+    "integromat", 
+    "n8n",
+    "no-code",
+    "no code",
+    "nocode",
+    "automation",
+    "workflow",
+    "integrate",
+    "integration",
+    "automate"
+  ],
+  "exclude_keywords": [
+    "blockchain",
+    "cryptocurrency",
+    "crypto",
+    "web3",
+    "nft",
+    "trading bot",
+    "machine learning",
+    "ml model",
+    "ai training",
+    "data labeling",
+    "full-time",
+    "full time employment",
+    "django",
+    "flask",
+    "react",
+    "vue",
+    "angular",
+    "mobile app",
+    "ios app",
+    "android app"
+  ],
+  "proposals_required": {
+    "max": 50,
+    "note": "Avoid oversaturated jobs"
+  },
+  "max_connects": {
+    "limit": 20,
+    "note": "Skip jobs requiring more than 20 connects to be in top 3"
+  },
+  "job_type": [
+    "fixed-price",
+    "hourly"
+  ],
+  "preferred_tools": {
+    "primary": ["Zapier", "Make.com", "Make", "n8n"],
+    "secondary": ["Integromat", "Airtable", "Google Sheets", "Notion"]
+  },
+  "scoring_weights": {
+    "tool_match": 30,
+    "client_rating": 15,
+    "budget_fit": 20,
+    "low_competition": 20,
+    "payment_verified": 15
+  }
+}

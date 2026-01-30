@@ -1,0 +1,159 @@
+{
+  "total_posts": 30,
+  "successful": 30,
+  "failed": 0,
+  "success_rate": 100.0,
+  "successful_uploads": [
+    {
+      "record_id": "recVWBqt2ZXG2Rk3H",
+      "title": "Prompt Engineering Fundamentals",
+      "scheduled_time": "2026-01-05T09:00:00"
+    },
+    {
+      "record_id": "recPvvBFQ02K1n6cr",
+      "title": "AI-Powered Customer Service",
+      "scheduled_time": "2026-01-06T09:00:00"
+    },
+    {
+      "record_id": "recNYRbiK6mq6rJuj",
+      "title": "Automated Content Repurposing",
+      "scheduled_time": "2026-01-07T09:00:00"
+    },
+    {
+      "record_id": "recMHsnDk9fS6cWv2",
+      "title": "80/20 Rule of AI Adoption",
+      "scheduled_time": "2026-01-08T09:00:00"
+    },
+    {
+      "record_id": "recQOOABGAEY3sv6Y",
+      "title": "Standard Operating Procedures",
+      "scheduled_time": "2026-01-09T09:00:00"
+    },
+    {
+      "record_id": "recR933qaiKshQwoz",
+      "title": "Building Feedback Loops",
+      "scheduled_time": "2026-01-10T09:00:00"
+    },
+    {
+      "record_id": "recOWJo1CQ89onxPn",
+      "title": "Automated Invoicing and Payment Follow-ups",
+      "scheduled_time": "2026-01-11T09:00:00"
+    },
+    {
+      "record_id": "recrg8KjeXbB7UTon",
+      "title": "Tasks vs Workflows vs Systems",
+      "scheduled_time": "2026-01-12T09:00:00"
+    },
+    {
+      "record_id": "recmxUPZUkYUvNofn",
+      "title": "Real-Time Dashboard Creation",
+      "scheduled_time": "2026-01-13T09:00:00"
+    },
+    {
+      "record_id": "rec2hY9VBUQVvDBST",
+      "title": "Automated Quality Assurance",
+      "scheduled_time": "2026-01-14T09:00:00"
+    },
+    {
+      "record_id": "recgKaPwuTdef4G78",
+      "title": "Custom GPT Creation",
+      "scheduled_time": "2026-01-15T09:00:00"
+    },
+    {
+      "record_id": "recRu0ha4cZJM1qEu",
+      "title": "AI-Assisted Proposal Writing",
+      "scheduled_time": "2026-01-16T09:00:00"
+    },
+    {
+      "record_id": "rec8Vo0dUZgugAztd",
+      "title": "Intelligent Email Triage",
+      "scheduled_time": "2026-01-17T09:00:00"
+    },
+    {
+      "record_id": "rec44NGSLGWbGT5kM",
+      "title": "Automation Audit Framework",
+      "scheduled_time": "2026-01-18T09:00:00"
+    },
+    {
+      "record_id": "recxbMFoHbkZ6th32",
+      "title": "CRM Automation Beyond Basics",
+      "scheduled_time": "2026-01-19T09:00:00"
+    },
+    {
+      "record_id": "recojPvlV4Z58Sd3a",
+      "title": "Zapier vs Make vs Custom Scripts",
+      "scheduled_time": "2026-01-20T09:00:00"
+    },
+    {
+      "record_id": "recrIMv5HXKL5oKIS",
+      "title": "Self-Annealing Systems",
+      "scheduled_time": "2026-01-21T09:00:00"
+    },
+    {
+      "record_id": "recOqMEd9C2ue4EZW",
+      "title": "Dependency Mapping",
+      "scheduled_time": "2026-01-22T09:00:00"
+    },
+    {
+      "record_id": "recWlj321Tz8Yh74b",
+      "title": "Modular System Design",
+      "scheduled_time": "2026-01-23T09:00:00"
+    },
+    {
+      "record_id": "recwsAQbQjq1tVi8H",
+      "title": "Documentation-Driven Operations",
+      "scheduled_time": "2026-01-24T09:00:00"
+    },
+    {
+      "record_id": "recF8BSL7FjzlmM5H",
+      "title": "Cloud-Based Operations",
+      "scheduled_time": "2026-01-25T09:00:00"
+    },
+    {
+      "record_id": "recr4HjiIstz1ct3s",
+      "title": "Automated Reporting Systems",
+      "scheduled_time": "2026-01-26T09:00:00"
+    },
+    {
+      "record_id": "recuBsyQLTvcpvrfG",
+      "title": "API Integration Fundamentals",
+      "scheduled_time": "2026-01-27T09:00:00"
+    },
+    {
+      "record_id": "recwOYsHYykj7aVaG",
+      "title": "Client Onboarding Automation",
+      "scheduled_time": "2026-01-28T09:00:00"
+    },
+    {
+      "record_id": "recKgNAqomIcIF3GJ",
+      "title": "Proactive Issue Detection",
+      "scheduled_time": "2026-01-29T09:00:00"
+    },
+    {
+      "record_id": "recUeRi4sW57s9Uaa",
+      "title": "Strategic Payment Automation",
+      "scheduled_time": "2026-01-30T09:00:00"
+    },
+    {
+      "record_id": "recHtRWOqDyJpI8Sc",
+      "title": "Scope Creep Prevention",
+      "scheduled_time": "2026-01-31T09:00:00"
+    },
+    {
+      "record_id": "receWY4Rg0YhB5mqR",
+      "title": "Hybrid Human-AI Workflows",
+      "scheduled_time": "2026-02-01T09:00:00"
+    },
+    {
+      "record_id": "recedJ2PK8cp20BK1",
+      "title": "Predictive Churn Detection",
+      "scheduled_time": "2026-02-02T09:00:00"
+    },
+    {
+      "record_id": "reciIm9QKLgIA9Bl6",
+      "title": "A/B Testing Automation",
+      "scheduled_time": "2026-02-03T09:00:00"
+    }
+  ],
+  "failed_uploads": []
+}

@@ -1,0 +1,81 @@
+{
+  "airtable": {
+    "base_id": "appXXXXXXXXXXXXXX",
+    "api_key": "patXXXXXXXXXXXXXX",
+    "tables": {
+      "posts": "Posts",
+      "content_ideas": "Content Ideas",
+      "scheduling_queue": "Scheduling Queue"
+    },
+    "fields": {
+      "posts": {
+        "title": "Title",
+        "content": "Content",
+        "status": "Status",
+        "image_url": "Image URL",
+        "image_prompt": "Image Prompt",
+        "created_date": "Created Date",
+        "scheduled_times": "Scheduled Times",
+        "approved_by": "Approved By",
+        "approval_notes": "Approval Notes"
+      },
+      "content_ideas": {
+        "topic": "Topic",
+        "description": "Description",
+        "content_type": "Content Type",
+        "research_date": "Research Date",
+        "sources": "Sources"
+      },
+      "scheduling_queue": {
+        "post_id": "Post ID",
+        "scheduled_time": "Scheduled Time",
+        "status": "Status",
+        "platform": "Platform",
+        "posted_url": "Posted URL"
+      }
+    }
+  },
+  "linkedin": {
+    "posting_times": [
+      "09:00",
+      "14:00",
+      "20:00"
+    ],
+    "posts_per_day": 3,
+    "timezone": "America/New_York"
+  },
+  "content_research": {
+    "topics": [
+      "AI automation for business",
+      "Workflow optimization",
+      "Business process automation",
+      "AI implementation strategies",
+      "Prompt engineering for productivity",
+      "Business efficiency tips",
+      "Automation ROI"
+    ],
+    "content_types": [
+      "AI Workflow Prompt",
+      "Automation Case Study",
+      "AI Implementation Guide",
+      "Business Tip",
+      "Industry Insight"
+    ]
+  },
+  "image_generation": {
+    "provider": "banana",
+    "model_name": "banana-pro",
+    "style": "modern_business",
+    "aspect_ratio": "1:1",
+    "default_dimensions": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  "posting_schedule": {
+    "research_time": "06:00",
+    "approval_window_hours": 12,
+    "automatic_posting": true,
+    "post_spacing_minutes": 480
+  }
+}

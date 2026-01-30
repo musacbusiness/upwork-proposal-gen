@@ -1,0 +1,129 @@
+{
+  "total_posts": 30,
+  "successful": 0,
+  "failed": 30,
+  "success_rate": 0.0,
+  "successful_uploads": [],
+  "failed_uploads": [
+    {
+      "title": "Prompt Engineering Fundamentals",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "AI-Powered Customer Service",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Automated Content Repurposing",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "80/20 Rule of AI Adoption",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Standard Operating Procedures",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Building Feedback Loops",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Automated Invoicing and Payment Follow-ups",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Tasks vs Workflows vs Systems",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Real-Time Dashboard Creation",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Automated Quality Assurance",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Custom GPT Creation",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "AI-Assisted Proposal Writing",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Intelligent Email Triage",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Automation Audit Framework",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "CRM Automation Beyond Basics",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Zapier vs Make vs Custom Scripts",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Self-Annealing Systems",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Dependency Mapping",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Modular System Design",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Documentation-Driven Operations",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Cloud-Based Operations",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Automated Reporting Systems",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "API Integration Fundamentals",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Client Onboarding Automation",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Proactive Issue Detection",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Strategic Payment Automation",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Scope Creep Prevention",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Hybrid Human-AI Workflows",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "Predictive Churn Detection",
+      "error": "Failed to create record"
+    },
+    {
+      "title": "A/B Testing Automation",
+      "error": "Failed to create record"
+    }
+  ]
+}

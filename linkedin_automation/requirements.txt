@@ -1,0 +1,22 @@
+# LinkedIn Automation - Python Requirements
+# Install: pip3 install -r requirements.txt
+
+# Browser Automation
+selenium>=4.36.0
+webdriver-manager>=4.0.0
+
+# AI & Content Generation
+anthropic>=0.39.0
+
+# HTTP & API
+requests>=2.32.0
+flask>=3.0.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+
+# Timezone handling
+pytz>=2024.1
+
+# Image Processing (if needed)
+Pillow>=10.0.0

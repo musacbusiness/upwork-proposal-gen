@@ -1,0 +1,37 @@
+{
+  "connects": {
+    "default_cost": 16,
+    "boost_amount": 4,
+    "max_boost": 50,
+    "note": "boost_amount = additional connects to bid for higher visibility"
+  },
+  "bidding_strategy": {
+    "auto_bid": true,
+    "fixed_price_multiplier": 1.0,
+    "hourly_rate": 75,
+    "note": "hourly_rate used when job doesn't specify budget"
+  },
+  "submission_limits": {
+    "max_per_day": 10,
+    "max_per_run": 5,
+    "delay_between_submissions": 30,
+    "note": "delay in seconds between submissions to avoid rate limiting"
+  },
+  "proposal_settings": {
+    "max_length": 5000,
+    "include_questions": true,
+    "auto_generate": true,
+    "note": "If Proposal field is empty in Airtable, auto-generate using Claude"
+  },
+  "status_workflow": {
+    "trigger_status": "Approved",
+    "success_status": "Applied",
+    "failure_status": "Under Review",
+    "note": "Jobs with trigger_status will be processed for submission"
+  },
+  "notes": {
+    "connects_explanation": "Upwork charges connects per proposal. Boosting adds visibility.",
+    "typical_costs": "Fixed-price: 12-16 connects, Hourly: 6-8 connects",
+    "boost_benefits": "Higher boost = proposal shown higher in client's list"
+  }
+}

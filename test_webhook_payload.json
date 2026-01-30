@@ -1,0 +1,8 @@
+{
+  "record_id": "recTEST123abc",
+  "content": "🧪 Test post - please ignore. This is a sample payload to establish the webhook data structure in Make.com",
+  "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300",
+  "base_id": "appw88uD6ZM0ckF8f",
+  "table_id": "tbljg75KMQWDo2Hgu",
+  "scheduled_deletion_date": "2025-12-31T00:00:00.000Z"
+}

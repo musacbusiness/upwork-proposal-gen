@@ -1,0 +1,122 @@
+{
+  "name": "LinkedIn Auto-Posting with Airtable Sync & iPhone Notification",
+  "description": "Posts content to LinkedIn via Make.com, updates Airtable record status to Posted, and sends iPhone push notification when complete",
+  "flow": [
+    {
+      "id": 1,
+      "module": "builtin:WebhookTrigger",
+      "version": 1,
+      "parameters": {
+        "name": "Receive Post Data from Modal"
+      },
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "linkedin:createPost",
+      "version": 1,
+      "parameters": {
+        "connection": "__IMTCONN__linkedin",
+        "postText": "{{1.content}}",
+        "imageUrl": "{{1.image_url}}",
+        "imageUpload": "{{if(empty(1.image_url); false; true)}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "airtable:updateRecord",
+      "version": 2,
+      "parameters": {
+        "connection": "__IMTCONN__airtable",
+        "baseId": "{{1.base_id}}",
+        "tableId": "{{1.table_id}}",
+        "recordId": "{{1.record_id}}",
+        "fields": {
+          "Status": "Posted",
+          "Posted At": "{{now}}",
+          "LinkedIn Post URL": "{{2.postUrl}}"
+        }
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "make:sendNotification",
+      "version": 1,
+      "parameters": {
+        "notificationType": "push",
+        "title": "📱 LinkedIn Post Published",
+        "message": "Your post just went live! {{1.content | truncate(50)}}",
+        "deviceTarget": "iphone"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "source": 1,
+      "target": 2
+    },
+    {
+      "source": 2,
+      "target": 3
+    },
+    {
+      "source": 3,
+      "target": 4
+    }
+  ],
+  "metadata": {
+    "roundtrips": 4,
+    "maxErrors": 3,
+    "autoCommit": true,
+    "timeout": 300,
+    "version": 1
+  },
+  "webhookData": {
+    "dataStructure": {
+      "record_id": "text",
+      "content": "text",
+      "image_url": "text",
+      "base_id": "text",
+      "table_id": "text",
+      "scheduled_deletion_date": "text"
+    }
+  },
+  "notes": {
+    "setup": "1. Import this blueprint into Make.com\n2. Configure Airtable and LinkedIn connections\n3. Get the webhook URL from Module 1\n4. Add webhook URL to Modal secret: MAKE_LINKEDIN_WEBHOOK_URL\n5. Test with a sample post",
+    "modules": {
+      "1": "Webhook Trigger - Receives POST request from Modal with post data",
+      "2": "LinkedIn Create Post - Posts content and image to LinkedIn",
+      "3": "Airtable Update Record - Updates record status to 'Posted' with timestamp and LinkedIn URL",
+      "4": "iPhone Notification - Sends push notification to your iPhone via Make.com app"
+    },
+    "requirements": {
+      "airtable": "Connected Airtable account",
+      "linkedin": "Connected LinkedIn account (via Make.com)",
+      "iphone": "Make.com mobile app installed on iPhone",
+      "modal": "Modal webhook URL after deployment"
+    }
+  }
+}

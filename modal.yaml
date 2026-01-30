@@ -1,0 +1,17 @@
+# Modal deployment configuration
+# Used by: modal deploy --config modal.yaml
+
+app_name: upwork-proposal-generator
+
+# Define what gets deployed
+mounts:
+  - local_dir: .
+    remote_dir: /root/app
+
+# Secrets required
+secrets:
+  - upwork-proposal-secrets
+
+# Environment
+environment:
+  - PYTHONUNBUFFERED=1

@@ -1,0 +1,49 @@
+{
+  "budget": {
+    "min": 500,
+    "max": 10000,
+    "note": "Adjust based on your service pricing"
+  },
+  "client_rating": {
+    "min": 4.5,
+    "note": "Minimum client rating to consider"
+  },
+  "client_reviews": {
+    "min": 50,
+    "note": "Minimum number of client reviews"
+  },
+  "job_category": [
+    "Web Development",
+    "Automation",
+    "System Administration",
+    "Backend Development",
+    "Business Analysis",
+    "note: Leave empty array [] to accept all categories"
+  ],
+  "skills_required": [
+    "Python",
+    "Automation",
+    "API",
+    "note: At least one skill must match job requirements"
+  ],
+  "exclude_keywords": [
+    "blockchain",
+    "cryptocurrency",
+    "ai training",
+    "machine learning",
+    "note: Jobs containing these keywords will be rejected"
+  ],
+  "proposals_required": {
+    "max": 50,
+    "note": "Maximum number of existing proposals to accept"
+  },
+  "job_type": [
+    "fixed-price",
+    "note: Can be fixed-price, hourly, or leave empty for all types"
+  ],
+  "notes": {
+    "usage": "Load this file in filter_jobs.py to control which jobs get approved",
+    "all_filters_must_pass": "Jobs must pass ALL filters (AND logic) to be accepted",
+    "scoring": "Jobs are scored 0-100 based on fit, ranked by score in ClickUp"
+  }
+}

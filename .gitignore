@@ -1,0 +1,36 @@
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Secrets
+.claude/
+credentials.json
+token.json
+*.toml
+
+# Temporary files
+.tmp/
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Node/npm (if any)
+node_modules/
+.next/
+out/
+
+# Python
+venv/
+.venv/
+env/
+.Python
+*.egg-info/
+dist/
+build/

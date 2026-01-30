@@ -1,0 +1,116 @@
+{
+  "name": "LinkedIn Auto-Posting with SMS & Modal Sync",
+  "description": "Posts content to LinkedIn via Linkup API, sends SMS notification, and syncs back to Modal/Airtable",
+  "type": "scenario",
+  "modules": [
+    {
+      "id": 1,
+      "module": "webhooks:custom_webhook",
+      "name": "Receive Post Data from Modal",
+      "settings": {
+        "data": {
+          "spec": [
+            {
+              "name": "record_id",
+              "spec": {
+                "type": "text"
+              }
+            },
+            {
+              "name": "content",
+              "spec": {
+                "type": "text"
+              }
+            },
+            {
+              "name": "image_url",
+              "spec": {
+                "type": "text"
+              }
+            },
+            {
+              "name": "base_id",
+              "spec": {
+                "type": "text"
+              }
+            },
+            {
+              "name": "table_id",
+              "spec": {
+                "type": "text"
+              }
+            },
+            {
+              "name": "scheduled_deletion_date",
+              "spec": {
+                "type": "text"
+              }
+            }
+          ]
+        }
+      },
+      "info": "Copy the webhook URL from here and add it to Modal secret as MAKE_LINKEDIN_WEBHOOK_URL"
+    },
+    {
+      "id": 2,
+      "module": "linkedup:create_post",
+      "name": "Post to LinkedIn via Linkup",
+      "settings": {
+        "api_key": "YOUR_LINKUP_API_KEY",
+        "post_text": "{{1.content}}",
+        "image_url": "{{1.image_url}}",
+        "include_image": "{{if(empty(1.image_url); false; true)}}",
+        "options": {
+          "post_type": "standard",
+          "media_upload": "{{if(empty(1.image_url); false; true)}}"
+        }
+      },
+      "info": "Get your Linkup API key from https://linkup.so - it handles LinkedIn posting without checkpoints"
+    },
+    {
+      "id": 3,
+      "module": "sms:send_sms",
+      "name": "Send SMS Notification",
+      "settings": {
+        "phone_number": "{{env(RECIPIENT_PHONE)}}",
+        "message": "Your LinkedIn post just went live! Check it out: {{2.post_url}}"
+      },
+      "info": "Set RECIPIENT_PHONE in Make.com environment variables (e.g., +1234567890)"
+    },
+    {
+      "id": 4,
+      "module": "http:make_a_request",
+      "name": "Notify Modal That Post Is Live",
+      "settings": {
+        "url": "{{env(MODAL_WEBHOOK_URL)}}",
+        "method": "POST",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "type": "raw",
+          "raw": "{\n  \"record_id\": \"{{1.record_id}}\",\n  \"base_id\": \"{{1.base_id}}\",\n  \"table_id\": \"{{1.table_id}}\",\n  \"post_url\": \"{{2.post_url}}\",\n  \"posted_at\": \"{{now}}\",\n  \"status\": \"Posted\",\n  \"action\": \"mark_as_posted\"\n}"
+        }
+      },
+      "info": "Set MODAL_WEBHOOK_URL in Make.com environment to https://musacbusiness--linkedin-automation.modal.run/mark-post-as-posted"
+    }
+  ],
+  "routes": [
+    {
+      "source": 1,
+      "target": 2
+    },
+    {
+      "source": 2,
+      "target": 3
+    },
+    {
+      "source": 2,
+      "target": 4
+    }
+  ],
+  "notes": "Setup Instructions:\n1. Create new scenario in Make.com\n2. Copy-paste this blueprint\n3. Configure:\n   - Module 2: Add your Linkup API key\n   - Environment: Set RECIPIENT_PHONE and MODAL_WEBHOOK_URL\n   - Get webhook URL from Module 1 and add to Modal secret MAKE_LINKEDIN_WEBHOOK_URL\n4. Test with a sample post\n5. Enable scenario"
+}

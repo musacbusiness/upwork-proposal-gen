@@ -1,0 +1,572 @@
+{
+  "post_generation_spec": {
+    "version": "2.0",
+    "goal": "Maximum engagement + lead generation (book calls)",
+
+    "structure": {
+      "hook": {
+        "max_characters": 150,
+        "critical_cutoff_chars": 150,
+        "purpose": "Stop the scroll BEFORE 'See more' cutoff, create curiosity",
+        "placement": "First line (before 'See more' - CRITICAL)",
+        "research_note": "First 150 chars determine if user expands post or scrolls. This is make-or-break.",
+        "types": [
+          "question",
+          "number_data",
+          "contrarian",
+          "story",
+          "bold_claim",
+          "curiosity",
+          "relatable",
+          "emotional"
+        ],
+        "guidelines": {
+          "under_200_chars": "REQUIRED",
+          "must_create_tension": "CRITICAL - question, stat, problem, or emotion",
+          "avoid_generic": "NEVER use 'Here's what I learned' as hook",
+          "mobile_first": "Format for 6-inch phone screen",
+          "test_rule": "If boring without seeing more, rewrite"
+        }
+      },
+      "body": {
+        "optimal_characters": "1200-1600",
+        "research_backed": "LinkedIn data shows 1,200-1,600 chars drives 2x engagement vs shorter posts",
+        "max_characters": 3000,
+        "formatting": {
+          "line_breaks": "generous - CRITICAL for mobile",
+          "paragraphs": "1-2 sentences MAX - non-negotiable",
+          "sentence_length": "15-20 words average",
+          "bullets": "3-5 max per post",
+          "emojis": "1-3 max",
+          "mobile_priority": "Design for 6-inch phone first",
+          "whitespace": "More whitespace = higher engagement",
+          "research_note": "Mobile users scan, don't read. Short lines and breaks are critical."
+        }
+      },
+      "cta": {
+        "types": {
+          "soft": "engagement (questions, saves, comments) - Comments weighted 2x by algorithm",
+          "value": "lead capture (free resources, DM triggers) - For newsletter/list building",
+          "direct": "booking (call links, consultation offers) - For immediate conversions"
+        },
+        "placement": {
+          "soft_cta": "end of post body",
+          "direct_cta": "first comment (not in post body)"
+        },
+        "frequency": {
+          "soft": "80% of posts",
+          "direct": "20% of posts"
+        },
+        "best_practices": {
+          "action_verb_required": "USE: Ask, Share, Reply, Comment, Save NOT: Let me know",
+          "word_count": "MUST be 1-3 words maximum",
+          "specificity": "Be specific - not 'What do you think?' but 'What's YOUR biggest challenge with X?'",
+          "research_note": "Comments drive algorithm more than likes. Questions get 5-7x more comments."
+        }
+      },
+      "hashtags": {
+        "count": "3-5",
+        "placement": "end of post",
+        "strategy": "Mix 30% broad + 70% niche/specific hashtags",
+        "research_backed": "Posts with relevant hashtags get 30% more engagement",
+        "examples_broad": ["#AI", "#Automation", "#Business"],
+        "examples_niche": ["#AIAutomation", "#WorkflowOptimization", "#BusinessOwners"],
+        "avoid": "Avoid hashtag stuffing - kills post readability"
+      }
+    },
+
+    "posting_recommendations": {
+      "optimal_days": {
+        "best": ["Tuesday", "Wednesday", "Thursday"],
+        "peak": "Tuesday",
+        "reason": "Weekends see 40-60% lower engagement"
+      },
+      "optimal_times": {
+        "best_window_1": "8-10 AM",
+        "best_window_2": "10-11 AM",
+        "good_window": "1-4 PM",
+        "timezone": "Audience's local time",
+        "research_note": "First 60-90 minutes (golden hour) determines 70% of post's reach"
+      },
+      "golden_hour_critical": {
+        "first_90_minutes": "Engagement velocity is PRIMARY ranking factor",
+        "action": "MUST engage with comments within 60 min of posting",
+        "impact": "Early engagement signals quality to algorithm, expands reach 3-5x"
+      },
+      "posting_frequency": {
+        "recommended": "3-4 times per week",
+        "min_quality": "3x per week",
+        "max_sustainable": "5x per week",
+        "note": "Quality > Quantity. One great post beats 5 mediocre ones."
+      }
+    },
+
+    "writing_frameworks": [
+      {
+        "name": "PAS",
+        "full_name": "Problem → Agitate → Solution",
+        "best_for": ["pain point awareness", "service positioning"],
+        "structure": [
+          "Identify the problem your audience faces",
+          "Agitate by amplifying the pain/consequences",
+          "Present your solution as the answer"
+        ]
+      },
+      {
+        "name": "AIDA",
+        "full_name": "Attention → Interest → Desire → Action",
+        "best_for": ["longer posts", "authority building"],
+        "structure": [
+          "Hook that grabs attention",
+          "Build interest with story/context",
+          "Create desire with benefits/results",
+          "Clear call to action"
+        ]
+      },
+      {
+        "name": "BAB",
+        "full_name": "Before → After → Bridge",
+        "best_for": ["transformation stories", "case studies"],
+        "structure": [
+          "Describe the before state (pain)",
+          "Paint the after state (success)",
+          "Explain the bridge (how to get there)"
+        ]
+      },
+      {
+        "name": "Framework",
+        "full_name": "Step-by-Step Framework",
+        "best_for": ["authority building", "saves and shares"],
+        "structure": [
+          "Hook with promise of value",
+          "3-5 numbered steps with explanations",
+          "Results/outcomes",
+          "Save/share CTA"
+        ]
+      },
+      {
+        "name": "Contrarian",
+        "full_name": "Contrarian Take",
+        "best_for": ["thought leadership", "engagement"],
+        "structure": [
+          "Bold claim that challenges conventional wisdom",
+          "Evidence/reasoning to support claim",
+          "Reframe with your insight",
+          "Ask for agreement/disagreement"
+        ]
+      }
+    ],
+
+    "hook_templates": {
+      "curiosity": [
+        "The #1 mistake I see business owners make with {topic}...",
+        "What nobody tells you about {topic}...",
+        "I've watched hundreds of businesses try {topic}. Here's the pattern I keep seeing...",
+        "{topic} doesn't have to be complicated. Here's why most people get it wrong..."
+      ],
+      "contrarian": [
+        "Unpopular opinion: Most people approach {topic} completely wrong.",
+        "Stop doing what everyone says about {topic}. It's actually hurting your business.",
+        "Everyone says automate everything. I strongly disagree.",
+        "The advice you've been given about {topic} is outdated."
+      ],
+      "story": [
+        "A client once asked me how to handle {topic}. I thought I had the answer. I was wrong. Here's what actually works...",
+        "I almost lost a client to poor {topic} strategy. That moment changed everything I knew.",
+        "6 months ago, I was drowning in routine admin work. Here's how I got out.",
+        "The worst {topic} decision I ever made became my biggest lesson. And it's one every business owner is still repeating."
+      ],
+      "number_data": [
+        "I analyzed how 100+ businesses handle {topic}. Here's what works...",
+        "Smart automation saves businesses 20+ hours per week. Here's why...",
+        "85% of business owners waste time on tasks automation could handle...",
+        "I tested 15 different approaches to {topic}. Here's what I learned..."
+      ],
+      "question": [
+        "What would you do with an extra 20 hours/week? Most business owners say they'd focus on growth. Few actually get there.",
+        "Why do most automation projects fail? I used to wonder the same thing. Then I noticed the pattern.",
+        "Are you making this common {topic} mistake? Most business owners are. And it's costing them.",
+        "What's stopping you from scaling your business right now? I'd bet it's not what you think."
+      ],
+      "bold_claim": [
+        "You don't need to hire more people. You need better processes.",
+        "AI won't replace you. Someone using AI will.",
+        "The businesses scaling fastest in 2026 will have one thing in common...",
+        "I can predict which automation initiatives will fail. Here's how..."
+      ],
+      "relatable": [
+        "Raise your hand if you've ever spent 10 hours on routine admin work...",
+        "If you've ever felt trapped in operational work, read this...",
+        "You're not alone if your team spends most of their time on low-value tasks...",
+        "Most business owners won't admit this, but they're stuck in admin work..."
+      ]
+    },
+
+    "cta_templates": {
+      "soft_engagement": [
+        "What's your biggest challenge with {topic}? Drop it below 👇",
+        "Agree or disagree? Let me know in the comments.",
+        "Save this for later ♻️",
+        "Which of these resonates most with you?",
+        "What would you add to this list?"
+      ],
+      "value_capture": [
+        "I created a step-by-step guide for this. Comment 'GUIDE' and I'll send it.",
+        "I have a template that breaks this down. Drop a comment and I'll share it.",
+        "I created a checklist for this. DM me for access.",
+        "Free resource in the comments 👇"
+      ],
+      "direct_booking": [
+        "If you're ready to implement this, let's talk. Reply with 'CALL' and we'll set up a time.",
+        "Want to see how this could work in your business? Book a free strategy call.",
+        "Ready to free up time for high-ROI work? DM me and let's explore it.",
+        "I help business owners eliminate admin work so they can scale. Book a free consultation below."
+      ]
+    },
+
+    "content_mix": {
+      "expertise_posts": {
+        "percentage": 40,
+        "types": ["frameworks", "how-to guides", "industry insights", "data/research", "lessons learned"],
+        "cta_type": "soft",
+        "visual_type": ["carousel", "data_visualization", "infographic"]
+      },
+      "engagement_posts": {
+        "percentage": 40,
+        "types": ["questions", "polls", "hot takes", "relatable content", "personal stories"],
+        "cta_type": "soft",
+        "visual_type": ["personal_photo", "quote_card", "multi_image"]
+      },
+      "promotional_posts": {
+        "percentage": 20,
+        "types": ["case studies", "testimonials", "direct offers", "service explanations"],
+        "cta_type": "direct",
+        "visual_type": ["results_screenshot", "before_after", "testimonial_image"]
+      }
+    },
+
+    "visual_content": {
+      "image_types_ranked": {
+        "tier_1_highest": {
+          "carousel_pdf": {
+            "engagement_rate": "24.42%",
+            "use_frequency": "40% of posts",
+            "best_for": ["frameworks", "step-by-step guides", "educational content"],
+            "optimal_slides": "8-12",
+            "structure": {
+              "slide_1": "Hook (compelling question/statement)",
+              "slides_2_to_n": "Value delivery (one point per slide)",
+              "final_slide": "CTA (save, share, follow, or book)"
+            }
+          },
+          "multi_image": {
+            "engagement_rate": "6.60%",
+            "use_frequency": "20% of posts",
+            "best_for": ["before/after", "process breakdowns", "case studies"],
+            "optimal_images": "3-4 images"
+          },
+          "data_visualization": {
+            "engagement_multiplier": "650% vs text-only",
+            "use_frequency": "15% of posts",
+            "best_for": ["statistics", "research findings", "industry insights"],
+            "types": ["charts", "graphs", "infographics"]
+          }
+        },
+        "tier_2_strong": {
+          "personal_photo": {
+            "engagement_boost": "up to 30% with relevant selfies",
+            "use_frequency": "15% of posts",
+            "best_for": ["behind-the-scenes", "celebrations", "personal stories"],
+            "types": ["workspace", "presenting", "with clients", "candid work moments", "events"],
+            "avoid": ["low-quality selfies", "overly posed", "stock-looking"]
+          },
+          "quote_card": {
+            "use_frequency": "5% of posts",
+            "best_for": ["thought leadership", "memorable takeaways"],
+            "note": "ONLY use original insights, not generic motivational quotes"
+          },
+          "screenshot": {
+            "use_frequency": "5% of posts",
+            "best_for": ["testimonials", "results", "tool demonstrations"],
+            "types": ["client messages", "analytics dashboards", "before/after metrics"]
+          }
+        },
+        "tier_3_moderate": {
+          "single_image": {
+            "engagement_rate": "4.85%",
+            "use_frequency": "occasional",
+            "best_for": ["simple tips", "announcements"]
+          },
+          "branded_graphic": {
+            "use_frequency": "rare",
+            "best_for": ["company announcements"],
+            "note": "Can feel corporate/impersonal if overused"
+          }
+        },
+        "avoid": {
+          "types": [
+            "generic stock photos",
+            "overly designed graphics (feel like ads)",
+            "small text on images",
+            "low-resolution images",
+            "cluttered designs",
+            "generic quote posts",
+            "external link thumbnails"
+          ]
+        }
+      },
+
+      "image_dimensions": {
+        "feed_mobile_first": {
+          "dimensions": "1200 x 1350 px",
+          "ratio": "4:5",
+          "note": "RECOMMENDED - Maximum feed real estate on mobile"
+        },
+        "feed_square": {
+          "dimensions": "1200 x 1200 px",
+          "ratio": "1:1",
+          "note": "Versatile, good for consistent branding"
+        },
+        "feed_landscape": {
+          "dimensions": "1200 x 627 px",
+          "ratio": "1.91:1",
+          "note": "Use for links (in comments)"
+        },
+        "carousel_square": {
+          "dimensions": "1080 x 1080 px",
+          "ratio": "1:1",
+          "note": "Standard carousel format"
+        },
+        "carousel_vertical": {
+          "dimensions": "1080 x 1350 px",
+          "ratio": "4:5",
+          "note": "Better for mobile, more real estate"
+        }
+      },
+
+      "carousel_design_rules": {
+        "first_slide": {
+          "purpose": "Stop the scroll",
+          "elements": ["bold headline", "curiosity or value promise", "optional: 'Swipe to learn →'"],
+          "examples": [
+            "5 Automations I Wish I'd Built Sooner",
+            "The AI Prompt Framework That Changed Everything",
+            "How I Save 20 Hours/Week (Step by Step)"
+          ]
+        },
+        "middle_slides": {
+          "rule": "ONE idea per slide",
+          "elements": ["step number or progress indicator", "key point in large text", "2-3 lines explanation", "optional small icon/visual"],
+          "font_size": "min 24pt for body, 36pt+ for headlines"
+        },
+        "final_slide": {
+          "purpose": "Clear CTA",
+          "elements": ["save for later", "comment prompt", "follow CTA", "optional: DM trigger or booking link"]
+        },
+        "design_consistency": {
+          "colors": "Same brand colors throughout",
+          "fonts": "Same fonts throughout",
+          "layout": "Similar structure per slide type",
+          "padding": "60-80px from edges",
+          "progress": "Include slide numbers (e.g., '3/10')"
+        }
+      },
+
+      "design_best_practices": {
+        "colors": {
+          "rule": "Consistent brand colors, high contrast",
+          "avoid": "Overly bright/neon (looks unprofessional)"
+        },
+        "text": {
+          "amount": "Minimal (LinkedIn compresses images)",
+          "size": "Large, readable fonts (min 24pt)",
+          "contrast": "High contrast against background",
+          "padding": "60-80px from edges"
+        },
+        "style": {
+          "aesthetic": "Clean, professional",
+          "rule": "Authentic > polished",
+          "consistency": "Same look across posts for brand recognition"
+        },
+        "file_formats": {
+          "graphics": "PNG",
+          "photos": "JPG",
+          "carousels": "PDF only"
+        }
+      }
+    },
+
+    "video_content": {
+      "stats": {
+        "year_over_year_growth": "36%",
+        "shares_vs_other": "20x more shares than other content",
+        "linkedin_live_reactions": "7x more reactions",
+        "linkedin_live_comments": "24x more comments",
+        "usage_increase_2025": "69%"
+      },
+
+      "optimal_lengths": {
+        "quick_tips": {
+          "length": "5-15 seconds",
+          "performance": "Highest completion rate",
+          "best_for": "Quick hooks, looped content"
+        },
+        "standard": {
+          "length": "30-60 seconds",
+          "performance": "Optimal engagement",
+          "best_for": "Most organic content, tips, explanations"
+        },
+        "detailed": {
+          "length": "60-90 seconds",
+          "performance": "Good for high-value content",
+          "best_for": "Tutorials, detailed explanations"
+        },
+        "deep_dive": {
+          "length": "2-3 minutes",
+          "performance": "Works if highly valuable",
+          "best_for": "In-depth content, complex topics"
+        }
+      },
+
+      "video_types_ranked": {
+        "talking_head_plus_broll": {
+          "rank": 1,
+          "description": "You speaking + clips of what you're discussing",
+          "why_works": "Personal connection + visual interest",
+          "example": "Here's how I automate my week + screen recordings of tools"
+        },
+        "screen_recording_narration": {
+          "rank": 2,
+          "description": "Show your screen while explaining",
+          "why_works": "Demonstrates expertise, teaches practical skills",
+          "example": "Walking through an automation workflow"
+        },
+        "quick_tips": {
+          "rank": 3,
+          "description": "One actionable tip delivered fast",
+          "why_works": "Consumable, shareable, high completion",
+          "example": "The one prompt that saves me 5 hours/week"
+        },
+        "behind_the_scenes": {
+          "rank": 4,
+          "description": "Candid look at your work/process",
+          "why_works": "Authenticity, human connection",
+          "example": "What my morning routine looks like"
+        },
+        "linkedin_live": {
+          "rank": 5,
+          "description": "Real-time streaming",
+          "why_works": "7x reactions, 24x comments",
+          "best_for": "Q&A, interviews, real-time demonstrations"
+        }
+      },
+
+      "video_dimensions": {
+        "vertical": {
+          "dimensions": "1080 x 1920 px",
+          "ratio": "9:16",
+          "best_for": "Mobile-first, Stories"
+        },
+        "portrait": {
+          "dimensions": "1080 x 1350 px",
+          "ratio": "4:5",
+          "note": "RECOMMENDED for feed posts"
+        },
+        "square": {
+          "dimensions": "1080 x 1080 px",
+          "ratio": "1:1",
+          "note": "Versatile, good reach"
+        },
+        "landscape": {
+          "dimensions": "1920 x 1080 px",
+          "ratio": "16:9",
+          "best_for": "Interviews, presentations"
+        }
+      },
+
+      "production_requirements": {
+        "must_do": [
+          "Add captions ALWAYS (32% more watch time, 29% more engagement)",
+          "Hook in first 3 seconds",
+          "Vertical (4:5) or square (1:1) for mobile",
+          "Good lighting (natural light works)",
+          "Clear audio (more important than video quality)",
+          "Native upload (not YouTube/external links)"
+        ],
+        "avoid": [
+          "Long intros",
+          "Horizontal (16:9) unless necessary",
+          "No captions",
+          "External video links",
+          "Over-produced/corporate feel"
+        ]
+      }
+    },
+
+    "posting_schedule": {
+      "optimal_times": ["8:00-10:00 AM", "12:00-1:00 PM"],
+      "optimal_days": ["Tuesday", "Wednesday", "Thursday"],
+      "frequency": "3-5 posts per week minimum",
+      "golden_hour": "First 60-90 minutes critical for engagement"
+    },
+
+    "weekly_visual_mix": {
+      "monday": {
+        "type": "Carousel",
+        "purpose": "Educational content, frameworks"
+      },
+      "tuesday": {
+        "type": "Personal photo + story",
+        "purpose": "Human connection, authenticity"
+      },
+      "wednesday": {
+        "type": "Data visualization",
+        "purpose": "Authority, thought leadership"
+      },
+      "thursday": {
+        "type": "Multi-image or video",
+        "purpose": "Engagement, variety"
+      },
+      "friday": {
+        "type": "Results/case study image",
+        "purpose": "Lead generation, social proof"
+      }
+    },
+
+    "algorithm_optimization": {
+      "do": [
+        "Use native content (no external links in body)",
+        "Encourage meaningful comments",
+        "Maximize dwell time with valuable content",
+        "Use carousels and documents",
+        "Respond to comments within 1 hour",
+        "Use vertical (4:5) images for mobile",
+        "Add captions to all videos"
+      ],
+      "avoid": [
+        "External links in post body (put in comments)",
+        "More than 5 hashtags",
+        "Overly promotional content",
+        "Engagement pod activity",
+        "Generic low-value posts",
+        "Stock photos",
+        "Videos without captions"
+      ]
+    },
+
+    "target_metrics": {
+      "engagement_rate": ">6% (industry benchmark)",
+      "carousel_engagement": ">24% (best performing format)",
+      "comment_to_like_ratio": "Higher comments = better algorithm signal",
+      "dwell_time": "Longer posts (1000-1300 chars) increase dwell time",
+      "video_watch_time": "First 3 seconds determine completion"
+    },
+
+    "image_generation_prompts": {
+      "carousel_hook_slide": "Clean professional design, bold headline text '{title}', minimalist background, high contrast, brand colors, no clutter, 1080x1080 or 1080x1350",
+      "data_visualization": "Clean infographic style, {data_type} visualization, professional colors, minimal text, easy to read at small size, 1200x1350",
+      "quote_card": "Minimalist design, quote text '{quote}', attribution to {name}, clean background, high contrast typography, 1200x1200",
+      "personal_style": "Professional but authentic, not over-polished, human element, relatable aesthetic"
+    }
+  }
+}

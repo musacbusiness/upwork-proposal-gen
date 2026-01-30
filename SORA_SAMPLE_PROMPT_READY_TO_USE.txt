@@ -1,0 +1,135 @@
+═══════════════════════════════════════════════════════════════════════════════
+SORA 2 PROMPT - READY TO COPY/PASTE
+═══════════════════════════════════════════════════════════════════════════════
+
+Title: "The One AI Prompt That Saves Me 5 Hours/Week"
+Duration: 10 seconds
+Format: Vertical (4:5 aspect ratio, 1080x1350px)
+Niche: AI & Automation for Business Owners
+
+═══════════════════════════════════════════════════════════════════════════════
+PASTE THIS ENTIRE PROMPT INTO SORA 2:
+═══════════════════════════════════════════════════════════════════════════════
+
+Create a vertical (4:5 aspect ratio, 1080x1350px) LinkedIn video, EXACTLY 10 seconds
+long, that demonstrates a time-saving AI prompt for business owners. FAST PACED.
+
+SCENE 1 (0-2 seconds): HOOK - Immediate attention
+- First frame: Bold white text centered on dark background: "This prompt saves me
+  5 hours/week"
+- Hands quickly typing on laptop visible in background
+- NO voiceover - text only
+- Energy: Urgent, captivating
+- Goal: Stop the scroll in 2 seconds
+
+SCENE 2 (2-5 seconds): PROBLEM + SOLUTION CONTRAST
+- Split screen: Left side shows messy inbox (chaos), right side shows ChatGPT
+  interface
+- Quick cursor movement in inbox showing tedious manual work (time-lapsed)
+- Text overlay fades in: "Manual: 2 hours" on left, "AI: 2 minutes" on right
+- Arrow pointing from chaos to organized
+- Organized JSON results appearing on right side with ✨ animation
+
+SCENE 3 (5-8 seconds): THE PROOF
+- Show dashboard with results animating in:
+  "340 emails organized"
+  "Auto-categorized"
+  "Response templates ready"
+- Text overlay: "The exact prompt inside"
+- Keep it snappy, clean aesthetic
+
+SCENE 4 (8-10 seconds): CTA
+- Quick cut to person at desk with satisfied look
+- Bold text overlay: "DM 'PROMPT' for template"
+- Your LinkedIn handle appears
+- Quick fade to black
+- TOTAL TIME: 10 seconds exactly
+
+TECHNICAL REQUIREMENTS:
+- Vertical format: Must be 4:5 aspect ratio (1080x1350px)
+- Duration: EXACTLY 10 seconds (no longer)
+- Pacing: VERY fast cuts (0.5-2 second scenes), rapid transitions
+- Text overlays: Large, bold, white text on dark/contrasting backgrounds
+- Lighting: Natural, authentic (office/home setting with good window light)
+- Audio: Minimal background music or silence - absolutely no voiceover
+- Transitions: Quick fades or wipes between scenes
+- Style: Professional but authentic - real tools, not generic stock footage
+- Purpose: Hook hard and fast - 10 seconds is all you get to prove value
+
+═══════════════════════════════════════════════════════════════════════════════
+TESTING CHECKLIST FOR SORA OUTPUT:
+═══════════════════════════════════════════════════════════════════════════════
+
+Once Sora generates the video, check:
+
+✅ HOOK (First 3 seconds)
+  □ Does it immediately grab attention?
+  □ Is text overlay clear and readable?
+  □ Would someone watching muted understand the promise?
+
+✅ FORMAT
+  □ Is it truly vertical (4:5)?
+  □ Does text fit on mobile screen without cutting off?
+  □ Are scenes easy to follow without voiceover?
+
+✅ AUTHENTICITY
+  □ Looks like real tools/workflows (not generic)?
+  □ Lighting appears natural (not overly produced)?
+  □ Person/footage feels genuine, not corporate?
+
+✅ PACING
+  □ Does video maintain momentum with very fast cuts?
+  □ Are scene transitions snappy (0.5-2 second duration)?
+  □ Is it exactly 10 seconds (no longer)?
+
+✅ CTA (Last 2 seconds)
+  □ Is the action crystal clear (DM 'PROMPT')?
+  □ Text large enough to read quickly?
+  □ Feels direct but not pushy?
+
+═══════════════════════════════════════════════════════════════════════════════
+IF SORA DOESN'T NAIL IT ON FIRST TRY:
+═══════════════════════════════════════════════════════════════════════════════
+
+Try these refinement prompts:
+
+REFINEMENT #1 - If text overlay isn't readable:
+"Regenerate but with larger, bolder text overlays. Text should be easily readable
+on a phone screen. Use high-contrast white text on dark backgrounds."
+
+REFINEMENT #2 - If it feels too corporate/polished:
+"Regenerate with authentic, less polished feel. Real office/home setup. Natural
+lighting. Make it look like real work, not a commercial."
+
+REFINEMENT #3 - If hook isn't compelling enough:
+"Regenerate with more dramatic hook in first 2 seconds. The very first frame should
+make someone stop scrolling. Use bold, high-contrast text."
+
+REFINEMENT #4 - If it's longer than 10 seconds:
+"Regenerate but MUST be exactly 10 seconds. Remove any slow moments. Make cuts
+faster. Remove any voiceover or extra narration."
+
+═══════════════════════════════════════════════════════════════════════════════
+CUSTOMIZATION OPTIONS:
+═══════════════════════════════════════════════════════════════════════════════
+
+Replace these with your actual tools/workflows:
+- "ChatGPT" → "Claude" or "Gemini" (your actual AI tool)
+- "customer emails" → "support tickets", "leads", "feedback" (your use case)
+- "2 hours" → Your actual time saved
+- "340 emails" → Your actual volume
+
+═══════════════════════════════════════════════════════════════════════════════
+WHY THIS PROMPT WORKS FOR LINKEDIN:
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 10 seconds = HIGHEST completion rate (5-15 second sweet spot per research)
+✅ Hook in first 2 seconds = Stops the scroll before they even think
+✅ Vertical 4:5 format = Maximizes mobile feed real estate
+✅ Text-based = Works muted (80% watch with sound off)
+✅ Before/After contrast = Instantly shows value proposition
+✅ Authentic style = Builds trust vs overly polished ads
+✅ Clear value = Business owners immediately understand ROI
+✅ Direct CTA = One clear action (DM for template)
+
+═══════════════════════════════════════════════════════════════════════════════
