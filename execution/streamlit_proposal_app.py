@@ -11,8 +11,12 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load environment
+# Load environment (for local testing)
 load_dotenv()
+
+# For Streamlit Cloud: set environment variable from secrets
+if "ANTHROPIC_API_KEY" in st.secrets:
+    os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
 
 # Add current directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
