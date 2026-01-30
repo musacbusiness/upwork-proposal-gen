@@ -264,12 +264,28 @@ class ProposalGenerator:
                 ]
             )
 
+            # Debug: Log the response structure
+            logger.info(f"API Response: {message}")
+            logger.info(f"Content count: {len(message.content)}")
+
+            if not message.content:
+                logger.error("✗ API returned empty content array")
+                return None
+
             proposal = message.content[0].text.strip()
+
+            if not proposal:
+                logger.error("✗ API returned empty text")
+                logger.info(f"Full message: {message}")
+                return None
+
             logger.info("✓ Proposal generated successfully")
             return proposal
 
         except Exception as e:
             logger.error(f"✗ Proposal generation failed: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
             return None
 
     def _build_prompt(self, job_data: Dict) -> str:

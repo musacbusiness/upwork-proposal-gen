@@ -149,6 +149,18 @@ if generate_btn:
                 else:
                     st.error("❌ Proposal generation returned empty.")
 
+                    # Try to read and display logs
+                    try:
+                        from pathlib import Path
+                        log_file = Path(".tmp/upwork_proposal_log.txt")
+                        if log_file.exists():
+                            with open(log_file, 'r') as f:
+                                logs = f.read()
+                            st.warning("Debug logs:")
+                            st.code(logs[-2000:])  # Show last 2000 chars of log
+                    except Exception as log_err:
+                        st.write(f"Could not read logs: {log_err}")
+
             except Exception as e:
                 st.error(f"❌ ERROR: {type(e).__name__}")
                 st.error(f"Details: {str(e)}")
