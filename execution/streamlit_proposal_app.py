@@ -110,6 +110,12 @@ if generate_btn:
     else:
         with st.spinner("🤖 Generating proposal..."):
             try:
+                # Check if API key is set
+                api_key = os.getenv("ANTHROPIC_API_KEY")
+                if not api_key:
+                    st.error("❌ API key not found. Please add ANTHROPIC_API_KEY to Streamlit Secrets (Settings → Secrets).")
+                    st.stop()
+
                 # Initialize generator
                 generator = ProposalGenerator()
 
@@ -131,10 +137,11 @@ if generate_btn:
                     st.session_state.job_data = job_data
                     st.success("✓ Proposal generated successfully!")
                 else:
-                    st.error("Failed to generate proposal. Please try again.")
+                    st.error("❌ Proposal generation returned empty. This might be an API issue.")
 
             except Exception as e:
-                st.error(f"Error: {str(e)}")
+                st.error(f"❌ Error: {str(e)}")
+                st.write("**Debug info:** If you see this, there's an issue with the API call or configuration.")
 
 # Display proposal if generated
 if st.session_state.proposal:
