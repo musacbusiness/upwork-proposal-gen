@@ -14,7 +14,10 @@ from dotenv import load_dotenv
 # Load environment
 load_dotenv()
 
-from execution.generate_upwork_proposal import (
+# Add current directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from generate_upwork_proposal import (
     UpworkScraper,
     ProposalGenerator,
     ClipboardManager,
