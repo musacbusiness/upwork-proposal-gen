@@ -113,11 +113,15 @@ if generate_btn:
                 # Check if API key is set
                 api_key = os.getenv("ANTHROPIC_API_KEY")
                 if not api_key:
-                    st.error("❌ API key not found. Please add ANTHROPIC_API_KEY to Streamlit Secrets (Settings → Secrets).")
+                    st.error("❌ API key not found. Please add ANTHROPIC_API_KEY to Streamlit Secrets.")
                     st.stop()
 
+                st.info(f"✓ API key found ({len(api_key)} chars)")
+
                 # Initialize generator
+                st.write("Initializing proposal generator...")
                 generator = ProposalGenerator()
+                st.write("✓ Generator initialized")
 
                 # Prepare job data
                 job_data = {
@@ -129,19 +133,23 @@ if generate_btn:
                     'level': 'Not specified'
                 }
 
+                st.write("Calling Claude API...")
                 # Generate proposal
                 proposal = generator.generate_proposal(job_data)
+                st.write(f"✓ API returned: {len(proposal) if proposal else 0} chars")
 
                 if proposal:
                     st.session_state.proposal = proposal
                     st.session_state.job_data = job_data
                     st.success("✓ Proposal generated successfully!")
                 else:
-                    st.error("❌ Proposal generation returned empty. This might be an API issue.")
+                    st.error("❌ Proposal generation returned empty.")
 
             except Exception as e:
-                st.error(f"❌ Error: {str(e)}")
-                st.write("**Debug info:** If you see this, there's an issue with the API call or configuration.")
+                st.error(f"❌ ERROR: {type(e).__name__}")
+                st.error(f"Details: {str(e)}")
+                import traceback
+                st.code(traceback.format_exc())
 
 # Display proposal if generated
 if st.session_state.proposal:
