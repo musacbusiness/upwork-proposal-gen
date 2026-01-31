@@ -204,6 +204,7 @@ class ProposalGenerator:
     - Truth-focused - authenticity over polish
     - Client-centric - success = clients winning (scaling, saving time, more money)
     - Numbers-driven - use concrete examples and metrics
+    - Genuinely enthusiastic about helping clients solve real problems
 
     YOUR EXPERIENCE:
     - Founded MC Marketing Solutions (2019-2023): Learned that low-budget clients can't see ROI. Businesses need structure & automation.
@@ -214,6 +215,7 @@ class ProposalGenerator:
     - Real software > Platform constraints (vs. no-code tools that limit you)
     - Opportunity cost + speed-to-payback + potential = how you frame decisions
     - Fear is eliminated through reframing: if worst case is survivable AND you learn from it, fear has nowhere to land
+    - You genuinely want to help clients win and see their success
 
     HOW YOU TALK:
     1. Open with their pain point (show you understand the problem)
@@ -223,6 +225,7 @@ class ProposalGenerator:
     5. Paint the potential (what becomes possible?)
     6. Keep it direct and honest - no hype, no exaggeration
     7. Show your relevant experience (don't oversell, just state facts)
+    8. Express genuine enthusiasm for this specific opportunity and working with them
 
     PROPOSAL TONE:
     - Professional but direct (like talking to a peer, not a guru)
@@ -230,6 +233,7 @@ class ProposalGenerator:
     - Strategic (shows you think beyond the immediate task)
     - Concrete (numbers, specific examples, realistic timelines)
     - Confident but not arrogant (you know your approach works, but you're not god)
+    - Enthusiastic and energized about this specific work and client
     """
 
     def __init__(self):
@@ -279,6 +283,9 @@ class ProposalGenerator:
                 logger.info(f"Full message: {message}")
                 return None, None
 
+            # Remove em-dashes and replace with hyphens or remove entirely
+            proposal = self._clean_em_dashes(proposal)
+
             logger.info("✓ Proposal generated successfully")
 
             # Score the proposal
@@ -309,7 +316,9 @@ WRITE A PROPOSAL:
 - Include: At least one concrete number/metric/ROI calculation
 - Be authentic: No fluff, no "excited to help" cliches. Show you think this way.
 - Personalize: Reference specific details from their job description
-- Close with: "Look forward to working with you." or similar genuine closing line
+- Show genuine enthusiasm: Express how excited you are about this specific opportunity and working with them
+- Close with: "Look forward to working with you." or "Excited to collaborate on this." or similar genuine, enthusiastic closing
+- IMPORTANT: Never use em-dashes (the long dash character). Use hyphens or remove the dash entirely.
 
 The proposal will be copied directly into Upwork, so write it as if you're speaking to them directly.
 Return ONLY the proposal text - no intro, no notes, no extra commentary. Just the proposal."""
@@ -425,6 +434,23 @@ Return ONLY the proposal text - no intro, no notes, no extra commentary. Just th
                 'fit': 3,
                 'total_score': 12
             }
+
+    def _clean_em_dashes(self, text: str) -> str:
+        """
+        Remove em-dashes from text and replace with appropriate alternatives
+
+        Args:
+            text: Text that may contain em-dashes
+
+        Returns:
+            Text with em-dashes removed or replaced
+        """
+        # Replace em-dash (—) with regular hyphen or remove it
+        # Common em-dash character
+        text = text.replace('—', ' ')  # Replace with space in most cases
+        text = text.replace('–', '-')  # Replace en-dash with hyphen for clarity
+
+        return text
 
 
 class ClipboardManager:
