@@ -235,7 +235,7 @@ class ProposalGenerator:
     def __init__(self):
         self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-    def generate_proposal(self, job_data: Dict) -> Optional[str]:
+    def generate_proposal(self, job_data: Dict) -> tuple:
         """
         Generate a personalized proposal using Claude API
 
@@ -243,7 +243,7 @@ class ProposalGenerator:
             job_data: Dict with job details from scraper
 
         Returns:
-            Generated proposal text or None if generation fails
+            Tuple of (proposal text, score dict) or (None, None) if generation fails
         """
         try:
             # Build the prompt
@@ -270,23 +270,27 @@ class ProposalGenerator:
 
             if not message.content:
                 logger.error("✗ API returned empty content array")
-                return None
+                return None, None
 
             proposal = message.content[0].text.strip()
 
             if not proposal:
                 logger.error("✗ API returned empty text")
                 logger.info(f"Full message: {message}")
-                return None
+                return None, None
 
             logger.info("✓ Proposal generated successfully")
-            return proposal
+
+            # Score the proposal
+            score = self._score_proposal(proposal, job_data)
+
+            return proposal, score
 
         except Exception as e:
             logger.error(f"✗ Proposal generation failed: {e}")
             import traceback
             logger.error(traceback.format_exc())
-            return None
+            return None, None
 
     def _build_prompt(self, job_data: Dict) -> str:
         """Build the prompt for Claude to generate a proposal"""
@@ -296,6 +300,18 @@ class ProposalGenerator:
         budget = job_data.get('budget', 'Not specified')
         skills = ', '.join(job_data.get('skills', [])[:5]) if job_data.get('skills') else 'Not specified'
         level = job_data.get('level', 'Not specified')
+        client_name = job_data.get('client_name')
+        client_pain_point = job_data.get('client_pain_point')
+        job_details = job_data.get('job_details')
+
+        # Build personalization section if available
+        personalization_section = ""
+        if client_name:
+            personalization_section += f"\nClient Name: {client_name}"
+        if client_pain_point:
+            personalization_section += f"\nClient's Main Pain Point: {client_pain_point}"
+        if job_details:
+            personalization_section += f"\nSpecific Job Details to Reference: {job_details}"
 
         prompt = f"""You are writing a proposal for an Upwork job.
 
@@ -304,20 +320,141 @@ Title: {job_title}
 Budget: {budget}
 Experience Level Needed: {level}
 Skills Required: {skills}
-Full Description: {job_desc}
+Full Description: {job_desc}{personalization_section}
 
 WRITE A PROPOSAL:
 - Length: 150-250 words (should read in under 2 minutes)
-- Structure: Opening (their pain point) → Why you're a fit → Your approach → Outcome → Next steps
+- Structure: Opening (their pain point) > Why you're a fit > Your approach > Outcome
 - Tone: Direct, professional, numbers-focused. Show you understand their problem.
 - Include: At least one concrete number/metric/ROI calculation
-- Be authentic: No fluff, no "excited to help" clichés. Show you think this way.
-- Personalize: Reference something specific from their job description that shows you read it
+- Be authentic: No fluff, no "excited to help" cliches. Show you think this way.
+- Personalize: Reference specific details from their job description and pain points
+- Close with: "Look forward to working with you." or similar genuine closing line
 
 The proposal will be copied directly into Upwork, so write it as if you're speaking to them directly.
-Start with the proposal text only - no intro, no closing, just the proposal."""
+Return ONLY the proposal text - no intro, no notes, no extra commentary. Just the proposal."""
 
         return prompt
+
+    def _score_proposal(self, proposal: str, job_data: Dict) -> Dict:
+        """
+        Score the proposal using PQS framework (Hook, Plan, Proof, Fit)
+        Returns a score dict with individual component scores and total
+
+        Args:
+            proposal: The generated proposal text
+            job_data: Job details used to generate the proposal
+
+        Returns:
+            Dict with scores: {'hook': 1-5, 'plan': 1-5, 'proof': 1-5, 'fit': 1-5, 'total_score': 0-20}
+        """
+        try:
+            score = {
+                'hook': 0,
+                'plan': 0,
+                'proof': 0,
+                'fit': 0,
+                'total_score': 0
+            }
+
+            # Hook: Opening impact and attention grab (1-5)
+            if len(proposal) > 0:
+                first_sentence = proposal.split('.')[0] if '.' in proposal else proposal[:100]
+                if len(first_sentence) > 10 and len(first_sentence) < 150:
+                    score['hook'] = 5  # Good length for hook
+                elif len(first_sentence) > 5:
+                    score['hook'] = 4  # Acceptable
+                else:
+                    score['hook'] = 2
+
+                # Check if it addresses a specific pain point
+                job_desc_lower = job_data.get('description', '').lower()
+                pain_point = job_data.get('client_pain_point', '').lower()
+                first_200_chars = proposal[:200].lower()
+
+                # If job description has keywords and they appear in opening, boost score
+                if pain_point and any(word in first_200_chars for word in pain_point.split()[:3]):
+                    score['hook'] = min(5, score['hook'] + 1)
+
+            # Plan: Clarity of approach (1-5)
+            plan_keywords = ['approach', 'step', 'process', 'will', 'can', 'implement', 'build', 'create', 'set']
+            plan_count = sum(1 for keyword in plan_keywords if keyword in proposal.lower())
+            if plan_count >= 4:
+                score['plan'] = 5
+            elif plan_count >= 2:
+                score['plan'] = 4
+            elif plan_count >= 1:
+                score['plan'] = 3
+            else:
+                score['plan'] = 2
+
+            # Proof: Quantified results/metrics (1-5)
+            # Check for numbers, percentages, metrics
+            import re
+            numbers = re.findall(r'\b\d+(?:%|x|%+|\s*(?:hours|days|weeks|months|years|results|improvement|increase|decrease|growth|savings))', proposal.lower())
+            roi_keywords = ['roi', 'revenue', 'cost', 'save', 'increase', 'growth', 'improvement', 'reduce', 'efficiency']
+            roi_count = sum(1 for keyword in roi_keywords if keyword in proposal.lower())
+
+            if len(numbers) >= 2 or (len(numbers) >= 1 and roi_count >= 2):
+                score['proof'] = 5
+            elif len(numbers) >= 1:
+                score['proof'] = 4
+            elif roi_count >= 3:
+                score['proof'] = 4
+            elif roi_count >= 1:
+                score['proof'] = 3
+            else:
+                score['proof'] = 2
+
+            # Fit: Relevant experience and specificity (1-5)
+            # Check if proposal references job-specific details
+            job_title = job_data.get('title', '').lower()
+            job_desc = job_data.get('description', '').lower()
+            job_details = job_data.get('job_details', '').lower()
+            proposal_lower = proposal.lower()
+
+            specificity_count = 0
+
+            # Check for job title keywords
+            if job_title and any(word in proposal_lower for word in job_title.split()[:3]):
+                specificity_count += 1
+
+            # Check for job details
+            if job_details and any(word in proposal_lower for word in job_details.split()[:5]):
+                specificity_count += 1
+
+            # Check for industry/skill keywords
+            skill_keywords = job_data.get('skills', [])
+            skill_match = sum(1 for skill in skill_keywords[:3] if skill.lower() in proposal_lower)
+            if skill_match > 0:
+                specificity_count += 1
+
+            if specificity_count >= 2:
+                score['fit'] = 5
+            elif specificity_count >= 1:
+                score['fit'] = 4
+            elif len(proposal) > 200:  # At least substantial effort
+                score['fit'] = 3
+            else:
+                score['fit'] = 2
+
+            # Calculate total score
+            score['total_score'] = score['hook'] + score['plan'] + score['proof'] + score['fit']
+
+            logger.info(f"Proposal PQS Score: Hook={score['hook']} Plan={score['plan']} Proof={score['proof']} Fit={score['fit']} Total={score['total_score']}/20")
+
+            return score
+
+        except Exception as e:
+            logger.warning(f"Error scoring proposal: {e}")
+            # Return neutral scores if there's an error
+            return {
+                'hook': 3,
+                'plan': 3,
+                'proof': 3,
+                'fit': 3,
+                'total_score': 12
+            }
 
 
 class ClipboardManager:
@@ -414,7 +551,7 @@ class UpworkProposalGenerator:
 
         # Step 2: Generate proposal
         logger.info("\n[2/3] GENERATING PROPOSAL...")
-        proposal = self.generator.generate_proposal(job_data)
+        proposal, score = self.generator.generate_proposal(job_data)
 
         if not proposal:
             logger.error("\n✗ Failed to generate proposal. Check API key and try again.")

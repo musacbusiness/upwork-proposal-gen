@@ -77,8 +77,23 @@ with st.sidebar:
     """)
 
 # Main interface
-st.markdown("### Paste Job Description")
+st.markdown("### Step 1: Job Details")
 st.markdown("*Copy the full job description from Upwork and paste it below*")
+
+col1, col2 = st.columns(2)
+with col1:
+    job_title = st.text_input(
+        "Job Title (optional)",
+        placeholder="e.g., 'Build AI chatbot integration'",
+        label_visibility="collapsed"
+    )
+
+with col2:
+    client_name = st.text_input(
+        "Client Name (optional)",
+        placeholder="e.g., 'Sarah' or 'Tech Startup Inc'",
+        label_visibility="collapsed"
+    )
 
 job_description = st.text_area(
     "Job Description",
@@ -87,9 +102,21 @@ job_description = st.text_area(
     label_visibility="collapsed"
 )
 
-job_title = st.text_input(
-    "Job Title (optional)",
-    placeholder="e.g., 'Build AI chatbot integration'",
+# Personalization section
+st.markdown("### Step 2: Personalization (Optional)")
+st.markdown("*Add these details to make the proposal more personalized and increase reply rates*")
+
+client_pain_point = st.text_area(
+    "Client's Main Pain Point",
+    height=80,
+    placeholder="What's their biggest challenge? (e.g., 'Manual data entry is eating up 20 hours per week')",
+    label_visibility="collapsed"
+)
+
+job_details = st.text_area(
+    "Specific Details About This Job",
+    height=80,
+    placeholder="2-3 specific things from the job posting that stand out (e.g., 'They need integration with Zapier', 'Timeline is 2 weeks')",
     label_visibility="collapsed"
 )
 
@@ -99,6 +126,9 @@ if "proposal" not in st.session_state:
 
 if "job_data" not in st.session_state:
     st.session_state.job_data = None
+
+if "proposal_score" not in st.session_state:
+    st.session_state.proposal_score = None
 
 # Generate button
 generate_btn = st.button(
@@ -127,24 +157,35 @@ if generate_btn:
                 generator = ProposalGenerator()
                 st.write("✓ Generator initialized")
 
-                # Prepare job data
+                # Prepare job data with personalization
                 job_data = {
                     'job_id': 'upwork_job',
                     'title': job_title or 'Upwork Job',
                     'description': job_description.strip(),
                     'budget': 'Not specified',
                     'skills': [],
-                    'level': 'Not specified'
+                    'level': 'Not specified',
+                    'client_name': client_name.strip() if client_name else None,
+                    'client_pain_point': client_pain_point.strip() if client_pain_point else None,
+                    'job_details': job_details.strip() if job_details else None,
                 }
 
                 st.write("Calling Claude API...")
-                # Generate proposal
-                proposal = generator.generate_proposal(job_data)
+                # Generate proposal (returns tuple of proposal text and score dict)
+                result = generator.generate_proposal(job_data)
+
+                if isinstance(result, tuple):
+                    proposal, score = result
+                else:
+                    proposal = result
+                    score = None
+
                 st.write(f"✓ API returned: {len(proposal) if proposal else 0} chars")
 
                 if proposal:
                     st.session_state.proposal = proposal
                     st.session_state.job_data = job_data
+                    st.session_state.proposal_score = score
                     st.success("✓ Proposal generated successfully!")
                 else:
                     st.error("❌ Proposal generation returned empty.")
@@ -208,8 +249,45 @@ if st.session_state.proposal:
             st.session_state.job_data = None
             st.rerun()
 
-    # Quick stats
+    # Quick stats and quality score
     st.markdown("---")
+
+    # Display PQS score if available
+    if st.session_state.proposal_score:
+        score = st.session_state.proposal_score
+        total_score = score.get('total_score', 0)
+        max_score = 20
+
+        # Quality indicator
+        if total_score >= 18:
+            quality_color = "green"
+            quality_text = "Excellent"
+        elif total_score >= 15:
+            quality_color = "blue"
+            quality_text = "Good"
+        elif total_score >= 12:
+            quality_color = "orange"
+            quality_text = "Fair"
+        else:
+            quality_color = "red"
+            quality_text = "Needs Improvement"
+
+        st.markdown(f"### Quality Score: {total_score}/{max_score} - {quality_text}")
+
+        # Show individual component scores
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Hook", f"{score.get('hook', 0)}/5")
+        with col2:
+            st.metric("Plan", f"{score.get('plan', 0)}/5")
+        with col3:
+            st.metric("Proof", f"{score.get('proof', 0)}/5")
+        with col4:
+            st.metric("Fit", f"{score.get('fit', 0)}/5")
+
+        st.markdown("---")
+
+    # Stats
     col1, col2, col3 = st.columns(3)
 
     with col1:
