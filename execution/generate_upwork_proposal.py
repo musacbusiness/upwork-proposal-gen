@@ -304,8 +304,44 @@ class ProposalGenerator:
         """Build the prompt for Claude to generate a proposal"""
 
         job_desc = job_data.get('description', '')
+        regen_instructions = job_data.get('regen_instructions', '')
 
-        prompt = f"""You are writing a proposal for an Upwork job. Read the full job description carefully and write a targeted, enthusiastic proposal that sounds genuinely human.
+        if regen_instructions:
+            prompt = f"""You are regenerating a proposal for an Upwork job. Use the job description and the specific instructions provided to create an improved version.
+
+JOB DESCRIPTION:
+{job_desc}
+
+REGENERATION INSTRUCTIONS:
+{regen_instructions}
+
+WRITE A PROPOSAL WITH THESE GUIDELINES:
+* Length: 150-250 words (should read in under 2 minutes)
+* Structure: Opening (their pain point) > Why you're a fit > Your approach > Outcome
+* Tone: Direct, professional, and energized. Show you understand their problem AND you're excited about solving it.
+* Include: At least one concrete number, metric, or ROI calculation
+* Be authentic: No fluff, no generic "excited to help" lines. Show genuine enthusiasm for THIS specific work.
+* Personalize: Reference specific details from their job description
+* Follow the regeneration instructions above to improve the proposal
+* Express genuine excitement: Make it clear this is exactly the kind of work you love and you're genuinely interested in working with them on it
+
+CRITICAL WRITING RULES (these make it sound human, not AI):
+* NEVER use ANY dashes: no em-dashes (—), no regular dashes (-), no hyphens used as dashes
+* Use these alternatives instead:
+  - Use colons ONLY when introducing a list or a longer explanation that follows: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
+  - Use semicolons ONLY to separate two complete independent clauses that are closely related: "The logic is flawed; it skips variants inconsistently."
+  - Use commas for natural pauses and to connect thoughts: "I get it, you need someone to understand the workflow quickly." or "I've built similar systems, debugged complex workflows, and know exactly what to fix."
+  - Use periods to break up thoughts and add impact: "Your workflow is almost there. The real issue is inconsistent prompts. I can fix that."
+  - Use parentheses for asides: "I can have this running smoothly (including full testing) within days."
+  - Use "and" to connect related ideas: "We'll debug the logic and refine the prompts and test everything thoroughly."
+  - When in doubt, use a comma or period instead of a semicolon. Commas and periods are more conversational.
+
+* Close with: "Look forward to working with you." or "Excited to collaborate on this." or "Let's get this running perfectly." Something genuine.
+
+The proposal will be copied directly into Upwork, so write it as if you're speaking directly to them.
+Return ONLY the proposal text - no intro, no notes, no extra commentary. Just the proposal."""
+        else:
+            prompt = f"""You are writing a proposal for an Upwork job. Read the full job description carefully and write a targeted, enthusiastic proposal that sounds genuinely human.
 
 JOB DESCRIPTION:
 {job_desc}
@@ -322,12 +358,13 @@ WRITE A PROPOSAL WITH THESE GUIDELINES:
 CRITICAL WRITING RULES (these make it sound human, not AI):
 * NEVER use ANY dashes: no em-dashes (—), no regular dashes (-), no hyphens used as dashes
 * Use these alternatives instead:
-  - Use colons to introduce explanations: "Here's what I'd do: first, I'd audit the workflow..."
-  - Use semicolons to connect related ideas: "Your images are inconsistent; I can fix that."
-  - Use commas for pauses: "I've built similar systems, debugged complex n8n workflows, and know exactly what to look for."
-  - Use parentheses for asides: "I can have this running smoothly (including thorough testing) within days."
-  - Use "and" instead of dashes: "We'll debug the logic and refine the prompts and test everything thoroughly."
-  - Break sentences differently: Instead of "The issue—we found it immediately—is in the prompt logic" write "The issue is in the prompt logic. I found it immediately."
+  - Use colons ONLY when introducing a list or a longer explanation that follows: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
+  - Use semicolons ONLY to separate two complete independent clauses that are closely related: "The logic is flawed; it skips variants inconsistently."
+  - Use commas for natural pauses and to connect thoughts: "I get it, you need someone to understand the workflow quickly." or "I've built similar systems, debugged complex workflows, and know exactly what to fix."
+  - Use periods to break up thoughts and add impact: "Your workflow is almost there. The real issue is inconsistent prompts. I can fix that."
+  - Use parentheses for asides: "I can have this running smoothly (including full testing) within days."
+  - Use "and" to connect related ideas: "We'll debug the logic and refine the prompts and test everything thoroughly."
+  - When in doubt, use a comma or period instead of a semicolon. Commas and periods are more conversational.
 
 * Close with: "Look forward to working with you." or "Excited to collaborate on this." or "Let's get this running perfectly." Something genuine.
 
@@ -489,14 +526,16 @@ class ClipboardManager:
             True if successful, False otherwise
         """
         try:
-            # Try pbcopy (macOS)
+            # Try pbcopy (macOS) with explicit flushing
             process = subprocess.Popen(
                 ['pbcopy'],
                 stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
                 env={'LANG': 'en_US.UTF-8'}
             )
-            process.communicate(text.encode('utf-8'))
-            process.wait()
+            stdout, stderr = process.communicate(text.encode('utf-8'), timeout=5)
+            process.wait(timeout=2)
             logger.info("✓ Proposal copied to clipboard (macOS)")
             return True
         except Exception as e:
@@ -504,10 +543,12 @@ class ClipboardManager:
                 # Fallback: Try xclip (Linux)
                 process = subprocess.Popen(
                     ['xclip', '-selection', 'clipboard'],
-                    stdin=subprocess.PIPE
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE
                 )
-                process.communicate(text.encode('utf-8'))
-                process.wait()
+                stdout, stderr = process.communicate(text.encode('utf-8'), timeout=5)
+                process.wait(timeout=2)
                 logger.info("✓ Proposal copied to clipboard (Linux)")
                 return True
             except Exception as e2:

@@ -97,6 +97,12 @@ if "job_data" not in st.session_state:
 if "proposal_score" not in st.session_state:
     st.session_state.proposal_score = None
 
+if "show_regen_dialog" not in st.session_state:
+    st.session_state.show_regen_dialog = False
+
+if "regen_prompt" not in st.session_state:
+    st.session_state.regen_prompt = ""
+
 # Generate button
 generate_btn = st.button(
     "🚀 Generate Proposal",
@@ -209,9 +215,66 @@ if st.session_state.proposal:
 
     with col3:
         if st.button("🔄 Generate New", use_container_width=True):
-            st.session_state.proposal = None
-            st.session_state.job_data = None
+            st.session_state.show_regen_dialog = True
             st.rerun()
+
+    # Regeneration dialog
+    if st.session_state.show_regen_dialog:
+        st.markdown("---")
+        st.markdown("### ✏️ Regenerate Proposal")
+        st.markdown("*Optionally add instructions for regeneration (e.g., 'make it more enthusiastic', 'focus on timeline')*")
+
+        regen_prompt = st.text_area(
+            "Regeneration Instructions",
+            height=80,
+            placeholder="Leave empty to generate fresh, or add specific guidance...",
+            label_visibility="collapsed"
+        )
+
+        col_regen1, col_regen2 = st.columns(2)
+
+        with col_regen1:
+            if st.button("Generate", use_container_width=True, key="regen_with_prompt"):
+                st.session_state.show_regen_dialog = False
+
+                with st.spinner("🤖 Regenerating proposal..."):
+                    try:
+                        api_key = os.getenv("ANTHROPIC_API_KEY")
+                        if not api_key:
+                            st.error("❌ API key not found. Please add ANTHROPIC_API_KEY to Streamlit Secrets.")
+                            st.stop()
+
+                        generator = ProposalGenerator()
+
+                        # Get job data and add regeneration instructions if provided
+                        job_data = st.session_state.job_data.copy()
+                        if regen_prompt.strip():
+                            job_data['regen_instructions'] = regen_prompt.strip()
+
+                        result = generator.generate_proposal(job_data)
+
+                        if isinstance(result, tuple):
+                            proposal, score = result
+                        else:
+                            proposal = result
+                            score = None
+
+                        if proposal:
+                            st.session_state.proposal = proposal
+                            st.session_state.proposal_score = score
+                            st.success("✓ Proposal regenerated successfully!")
+                            st.rerun()
+                        else:
+                            st.error("❌ Failed to regenerate proposal.")
+
+                    except Exception as e:
+                        st.error(f"❌ ERROR: {type(e).__name__}")
+                        st.error(f"Details: {str(e)}")
+
+        with col_regen2:
+            if st.button("Cancel", use_container_width=True, key="cancel_regen"):
+                st.session_state.show_regen_dialog = False
+                st.rerun()
 
     # Quick stats and quality score
     st.markdown("---")
