@@ -197,9 +197,22 @@ if st.session_state.proposal:
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col1:
-        if st.button("📋 Copy to Clipboard", use_container_width=True):
-            ClipboardManager.copy_to_clipboard(st.session_state.proposal)
-            st.success("✓ Copied to clipboard!")
+        # JavaScript-based copy button that works in browser
+        copy_button_html = f"""
+        <div style="width: 100%; margin-bottom: 10px;">
+            <button onclick="
+                const text = `{st.session_state.proposal.replace(chr(96), chr(92) + chr(96)).replace(chr(34), chr(92) + chr(34))}`;
+                navigator.clipboard.writeText(text).then(() => {{
+                    alert('✓ Copied to clipboard!');
+                }}).catch(err => {{
+                    alert('Failed to copy: ' + err);
+                }});
+            " style="width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; background-color: #f0f2f6; font-weight: bold;">
+                📋 Copy to Clipboard
+            </button>
+        </div>
+        """
+        st.markdown(copy_button_html, unsafe_allow_html=True)
 
     with col2:
         if st.button("💾 Save as Text", use_container_width=True):
