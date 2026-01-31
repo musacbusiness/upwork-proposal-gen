@@ -328,13 +328,14 @@ WRITE A PROPOSAL WITH THESE GUIDELINES:
 CRITICAL WRITING RULES (these make it sound human, not AI):
 * NEVER use ANY dashes: no em-dashes (—), no regular dashes (-), no hyphens used as dashes
 * Use these alternatives instead:
-  - Use colons ONLY when introducing a list or a longer explanation that follows: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
-  - Use semicolons ONLY to separate two complete independent clauses that are closely related: "The logic is flawed; it skips variants inconsistently."
+  - Use colons ONLY when introducing a list or explanation: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
+  - Use semicolons ONLY when listing multiple items within a sentence: "I've debugged n8n workflows; optimized image generation prompts; fixed variant handling logic." OR in bullet format for clarity between items.
+  - NEVER use semicolons to separate two independent clauses. Instead use a comma or period.
   - Use commas for natural pauses and to connect thoughts: "I get it, you need someone to understand the workflow quickly." or "I've built similar systems, debugged complex workflows, and know exactly what to fix."
   - Use periods to break up thoughts and add impact: "Your workflow is almost there. The real issue is inconsistent prompts. I can fix that."
   - Use parentheses for asides: "I can have this running smoothly (including full testing) within days."
   - Use "and" to connect related ideas: "We'll debug the logic and refine the prompts and test everything thoroughly."
-  - When in doubt, use a comma or period instead of a semicolon. Commas and periods are more conversational.
+  - When in doubt, use a comma or period instead of anything else. Commas and periods are more conversational and human-like.
 
 * Close with: "Look forward to working with you." or "Excited to collaborate on this." or "Let's get this running perfectly." Something genuine.
 
@@ -358,13 +359,14 @@ WRITE A PROPOSAL WITH THESE GUIDELINES:
 CRITICAL WRITING RULES (these make it sound human, not AI):
 * NEVER use ANY dashes: no em-dashes (—), no regular dashes (-), no hyphens used as dashes
 * Use these alternatives instead:
-  - Use colons ONLY when introducing a list or a longer explanation that follows: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
-  - Use semicolons ONLY to separate two complete independent clauses that are closely related: "The logic is flawed; it skips variants inconsistently."
+  - Use colons ONLY when introducing a list or explanation: "Here's my approach: I'll audit the workflow, identify the prompt gaps, and run full tests."
+  - Use semicolons ONLY when listing multiple items within a sentence: "I've debugged n8n workflows; optimized image generation prompts; fixed variant handling logic." OR in bullet format for clarity between items.
+  - NEVER use semicolons to separate two independent clauses. Instead use a comma or period.
   - Use commas for natural pauses and to connect thoughts: "I get it, you need someone to understand the workflow quickly." or "I've built similar systems, debugged complex workflows, and know exactly what to fix."
   - Use periods to break up thoughts and add impact: "Your workflow is almost there. The real issue is inconsistent prompts. I can fix that."
   - Use parentheses for asides: "I can have this running smoothly (including full testing) within days."
   - Use "and" to connect related ideas: "We'll debug the logic and refine the prompts and test everything thoroughly."
-  - When in doubt, use a comma or period instead of a semicolon. Commas and periods are more conversational.
+  - When in doubt, use a comma or period instead of anything else. Commas and periods are more conversational and human-like.
 
 * Close with: "Look forward to working with you." or "Excited to collaborate on this." or "Let's get this running perfectly." Something genuine.
 
