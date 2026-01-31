@@ -295,32 +295,12 @@ class ProposalGenerator:
     def _build_prompt(self, job_data: Dict) -> str:
         """Build the prompt for Claude to generate a proposal"""
 
-        job_title = job_data.get('title', 'Unknown')
         job_desc = job_data.get('description', '')
-        budget = job_data.get('budget', 'Not specified')
-        skills = ', '.join(job_data.get('skills', [])[:5]) if job_data.get('skills') else 'Not specified'
-        level = job_data.get('level', 'Not specified')
-        client_name = job_data.get('client_name')
-        client_pain_point = job_data.get('client_pain_point')
-        job_details = job_data.get('job_details')
 
-        # Build personalization section if available
-        personalization_section = ""
-        if client_name:
-            personalization_section += f"\nClient Name: {client_name}"
-        if client_pain_point:
-            personalization_section += f"\nClient's Main Pain Point: {client_pain_point}"
-        if job_details:
-            personalization_section += f"\nSpecific Job Details to Reference: {job_details}"
+        prompt = f"""You are writing a proposal for an Upwork job. Read the full job description carefully and extract the context to write a targeted proposal.
 
-        prompt = f"""You are writing a proposal for an Upwork job.
-
-JOB DETAILS:
-Title: {job_title}
-Budget: {budget}
-Experience Level Needed: {level}
-Skills Required: {skills}
-Full Description: {job_desc}{personalization_section}
+JOB DESCRIPTION:
+{job_desc}
 
 WRITE A PROPOSAL:
 - Length: 150-250 words (should read in under 2 minutes)
@@ -328,7 +308,7 @@ WRITE A PROPOSAL:
 - Tone: Direct, professional, numbers-focused. Show you understand their problem.
 - Include: At least one concrete number/metric/ROI calculation
 - Be authentic: No fluff, no "excited to help" cliches. Show you think this way.
-- Personalize: Reference specific details from their job description and pain points
+- Personalize: Reference specific details from their job description
 - Close with: "Look forward to working with you." or similar genuine closing line
 
 The proposal will be copied directly into Upwork, so write it as if you're speaking to them directly.
@@ -367,15 +347,6 @@ Return ONLY the proposal text - no intro, no notes, no extra commentary. Just th
                 else:
                     score['hook'] = 2
 
-                # Check if it addresses a specific pain point
-                job_desc_lower = job_data.get('description', '').lower()
-                pain_point = job_data.get('client_pain_point', '').lower()
-                first_200_chars = proposal[:200].lower()
-
-                # If job description has keywords and they appear in opening, boost score
-                if pain_point and any(word in first_200_chars for word in pain_point.split()[:3]):
-                    score['hook'] = min(5, score['hook'] + 1)
-
             # Plan: Clarity of approach (1-5)
             plan_keywords = ['approach', 'step', 'process', 'will', 'can', 'implement', 'build', 'create', 'set']
             plan_count = sum(1 for keyword in plan_keywords if keyword in proposal.lower())
@@ -406,34 +377,33 @@ Return ONLY the proposal text - no intro, no notes, no extra commentary. Just th
             else:
                 score['proof'] = 2
 
-            # Fit: Relevant experience and specificity (1-5)
-            # Check if proposal references job-specific details
-            job_title = job_data.get('title', '').lower()
-            job_desc = job_data.get('description', '').lower()
-            job_details = job_data.get('job_details', '').lower()
+            # Fit: Relevant experience and proposal quality (1-5)
+            # Check if proposal is substantial and specific
             proposal_lower = proposal.lower()
+            job_desc = job_data.get('description', '').lower()
 
             specificity_count = 0
 
-            # Check for job title keywords
-            if job_title and any(word in proposal_lower for word in job_title.split()[:3]):
+            # Check if proposal references job-specific concepts from description
+            # Extract key terms from job description
+            job_words = set(word for word in job_desc.split() if len(word) > 4)
+            proposal_words = set(word for word in proposal_lower.split() if len(word) > 4)
+            word_overlap = len(job_words.intersection(proposal_words))
+
+            if word_overlap >= 5:
+                specificity_count = 2
+            elif word_overlap >= 2:
+                specificity_count = 1
+
+            # Check for substantial length
+            if len(proposal) > 200:
                 specificity_count += 1
 
-            # Check for job details
-            if job_details and any(word in proposal_lower for word in job_details.split()[:5]):
-                specificity_count += 1
-
-            # Check for industry/skill keywords
-            skill_keywords = job_data.get('skills', [])
-            skill_match = sum(1 for skill in skill_keywords[:3] if skill.lower() in proposal_lower)
-            if skill_match > 0:
-                specificity_count += 1
-
-            if specificity_count >= 2:
+            if specificity_count >= 3:
                 score['fit'] = 5
-            elif specificity_count >= 1:
+            elif specificity_count >= 2:
                 score['fit'] = 4
-            elif len(proposal) > 200:  # At least substantial effort
+            elif specificity_count >= 1:
                 score['fit'] = 3
             else:
                 score['fit'] = 2

@@ -77,46 +77,13 @@ with st.sidebar:
     """)
 
 # Main interface
-st.markdown("### Step 1: Job Details")
+st.markdown("### Paste Job Description")
 st.markdown("*Copy the full job description from Upwork and paste it below*")
-
-col1, col2 = st.columns(2)
-with col1:
-    job_title = st.text_input(
-        "Job Title (optional)",
-        placeholder="e.g., 'Build AI chatbot integration'",
-        label_visibility="collapsed"
-    )
-
-with col2:
-    client_name = st.text_input(
-        "Client Name (optional)",
-        placeholder="e.g., 'Sarah' or 'Tech Startup Inc'",
-        label_visibility="collapsed"
-    )
 
 job_description = st.text_area(
     "Job Description",
-    height=250,
+    height=300,
     placeholder="Paste the full job description from Upwork here...",
-    label_visibility="collapsed"
-)
-
-# Personalization section
-st.markdown("### Step 2: Personalization (Optional)")
-st.markdown("*Add these details to make the proposal more personalized and increase reply rates*")
-
-client_pain_point = st.text_area(
-    "Client's Main Pain Point",
-    height=80,
-    placeholder="What's their biggest challenge? (e.g., 'Manual data entry is eating up 20 hours per week')",
-    label_visibility="collapsed"
-)
-
-job_details = st.text_area(
-    "Specific Details About This Job",
-    height=80,
-    placeholder="2-3 specific things from the job posting that stand out (e.g., 'They need integration with Zapier', 'Timeline is 2 weeks')",
     label_visibility="collapsed"
 )
 
@@ -157,17 +124,14 @@ if generate_btn:
                 generator = ProposalGenerator()
                 st.write("✓ Generator initialized")
 
-                # Prepare job data with personalization
+                # Prepare job data
                 job_data = {
                     'job_id': 'upwork_job',
-                    'title': job_title or 'Upwork Job',
+                    'title': 'Upwork Job',
                     'description': job_description.strip(),
                     'budget': 'Not specified',
                     'skills': [],
                     'level': 'Not specified',
-                    'client_name': client_name.strip() if client_name else None,
-                    'client_pain_point': client_pain_point.strip() if client_pain_point else None,
-                    'job_details': job_details.strip() if job_details else None,
                 }
 
                 st.write("Calling Claude API...")
