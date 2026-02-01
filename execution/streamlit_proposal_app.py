@@ -184,41 +184,13 @@ if st.session_state.proposal:
     st.markdown("---")
     st.markdown("### ✅ Your Proposal")
 
-    # Display proposal in box
-    with st.container():
-        st.markdown("""
-        <div style="background-color: #f0f2f6; padding: 20px; border-radius: 8px; border-left: 4px solid #1f77b4;">
-        """, unsafe_allow_html=True)
-
-        st.markdown(st.session_state.proposal)
-
-        st.markdown("</div>", unsafe_allow_html=True)
+    # Display proposal using st.code which has built-in copy button
+    st.code(st.session_state.proposal, language="text")
 
     # Action buttons
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2 = st.columns([1, 1])
 
     with col1:
-        # Copy button using document.execCommand (more compatible with Streamlit sandbox)
-        copy_button_html = f"""
-        <div style="width: 100%; margin-bottom: 10px;">
-            <textarea id="proposal_text" style="display:none;">{st.session_state.proposal}</textarea>
-            <button onclick="
-                var textArea = document.getElementById('proposal_text');
-                textArea.select();
-                try {{
-                    document.execCommand('copy');
-                    alert('✓ Copied to clipboard!');
-                }} catch(err) {{
-                    alert('Failed to copy');
-                }}
-            " style="width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; background-color: #f0f2f6; font-weight: bold;">
-                📋 Copy to Clipboard
-            </button>
-        </div>
-        """
-        st.markdown(copy_button_html, unsafe_allow_html=True)
-
-    with col2:
         if st.button("💾 Save as Text", use_container_width=True):
             proposals_dir = Path(".tmp/proposals")
             proposals_dir.mkdir(parents=True, exist_ok=True)
@@ -230,7 +202,7 @@ if st.session_state.proposal:
 
             st.success(f"✓ Saved locally")
 
-    with col3:
+    with col2:
         if st.button("🔄 Generate New", use_container_width=True):
             st.session_state.show_regen_dialog = True
             st.rerun()
