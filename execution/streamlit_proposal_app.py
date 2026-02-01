@@ -198,25 +198,23 @@ if st.session_state.proposal:
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col1:
-        # JavaScript-based copy button using proper JSON encoding
-        # This approach properly escapes all special characters in the proposal text
-        proposal_json = json.dumps(st.session_state.proposal)
+        # Copy button using document.execCommand (more compatible with Streamlit sandbox)
         copy_button_html = f"""
         <div style="width: 100%; margin-bottom: 10px;">
-            <button id="copy_proposal_btn" style="width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; background-color: #f0f2f6; font-weight: bold;">
+            <textarea id="proposal_text" style="display:none;">{st.session_state.proposal}</textarea>
+            <button onclick="
+                var textArea = document.getElementById('proposal_text');
+                textArea.select();
+                try {{
+                    document.execCommand('copy');
+                    alert('✓ Copied to clipboard!');
+                }} catch(err) {{
+                    alert('Failed to copy');
+                }}
+            " style="width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; background-color: #f0f2f6; font-weight: bold;">
                 📋 Copy to Clipboard
             </button>
         </div>
-        <script>
-            document.getElementById('copy_proposal_btn').addEventListener('click', function() {{
-                const text = {proposal_json};
-                navigator.clipboard.writeText(text).then(() => {{
-                    alert('✓ Copied to clipboard!');
-                }}).catch(err => {{
-                    alert('Failed to copy: ' + err);
-                }});
-            }});
-        </script>
         """
         st.markdown(copy_button_html, unsafe_allow_html=True)
 
