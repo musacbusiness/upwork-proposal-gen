@@ -183,14 +183,24 @@ if generate_btn:
 if st.session_state.proposal:
     st.markdown("---")
     st.markdown("### ✅ Your Proposal")
+    st.markdown("*Select all text and copy, or use the Download button below*")
 
     # Display proposal using st.code which has built-in copy button
     st.code(st.session_state.proposal, language="text")
 
     # Action buttons
-    col1, col2 = st.columns([1, 1])
+    col1, col2, col3 = st.columns([1, 1, 1])
 
     with col1:
+        st.download_button(
+            label="📥 Download Proposal",
+            data=st.session_state.proposal,
+            file_name=f"proposal_{st.session_state.job_data.get('job_id', 'proposal')}.txt",
+            mime="text/plain",
+            use_container_width=True
+        )
+
+    with col2:
         if st.button("💾 Save as Text", use_container_width=True):
             proposals_dir = Path(".tmp/proposals")
             proposals_dir.mkdir(parents=True, exist_ok=True)
@@ -202,7 +212,7 @@ if st.session_state.proposal:
 
             st.success(f"✓ Saved locally")
 
-    with col2:
+    with col3:
         if st.button("🔄 Generate New", use_container_width=True):
             st.session_state.show_regen_dialog = True
             st.rerun()
