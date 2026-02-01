@@ -6,6 +6,7 @@ Optimized for Streamlit Cloud (no web scraping)
 """
 
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 import sys
 import json
@@ -193,26 +194,91 @@ if st.session_state.proposal:
         label_visibility="collapsed"
     )
 
+    # Copy to clipboard button using HTML/JavaScript component
+    copy_button_html = f"""
+    <button id="copyBtn" onclick="copyToClipboard()" style="
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background-color: #f0f2f6;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    ">📋 Copy to Clipboard</button>
+
+    <script>
+    function copyToClipboard() {{
+        const text = `{json.dumps(st.session_state.proposal)}`;
+        const cleanText = JSON.parse(text);
+
+        // Use navigator.clipboard if available
+        if (navigator.clipboard && navigator.clipboard.writeText) {{
+            navigator.clipboard.writeText(cleanText).then(() => {{
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ Copied!';
+                btn.style.backgroundColor = '#90EE90';
+                setTimeout(() => {{
+                    btn.textContent = '📋 Copy to Clipboard';
+                    btn.style.backgroundColor = '#f0f2f6';
+                }}, 2000);
+            }}).catch(() => {{
+                // Fallback: use textarea trick
+                const textarea = document.createElement('textarea');
+                textarea.value = cleanText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ Copied!';
+                btn.style.backgroundColor = '#90EE90';
+                setTimeout(() => {{
+                    btn.textContent = '📋 Copy to Clipboard';
+                    btn.style.backgroundColor = '#f0f2f6';
+                }}, 2000);
+            }});
+        }} else {{
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = cleanText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ Copied!';
+            btn.style.backgroundColor = '#90EE90';
+            setTimeout(() => {{
+                btn.textContent = '📋 Copy to Clipboard';
+                btn.style.backgroundColor = '#f0f2f6';
+            }}, 2000);
+        }}
+    }}
+    </script>
+    """
+    components.html(copy_button_html, height=60)
+
     # Action buttons
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown("**How to copy:**\n1. Triple-click the text above\n2. Cmd+C (Mac) or Ctrl+C (Windows/Linux)\n3. Paste into Upwork")
+        if st.button("🔄 Generate New", use_container_width=True):
+            st.session_state.show_regen_dialog = True
+            st.rerun()
 
     with col2:
-        col_sub1, col_sub2 = st.columns([1, 1])
-        with col_sub1:
-            if st.button("🔄 Generate New", use_container_width=True):
-                st.session_state.show_regen_dialog = True
-                st.rerun()
-        with col_sub2:
-            st.download_button(
-                label="📥 Download",
-                data=st.session_state.proposal,
-                file_name=f"proposal.txt",
-                mime="text/plain",
-                use_container_width=True
-            )
+        st.download_button(
+            label="📥 Download Proposal",
+            data=st.session_state.proposal,
+            file_name=f"proposal.txt",
+            mime="text/plain",
+            use_container_width=True
+        )
 
     # Regeneration dialog
     if st.session_state.show_regen_dialog:
