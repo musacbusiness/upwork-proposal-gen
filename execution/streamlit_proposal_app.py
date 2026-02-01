@@ -183,39 +183,36 @@ if generate_btn:
 if st.session_state.proposal:
     st.markdown("---")
     st.markdown("### ✅ Your Proposal")
-    st.markdown("*Select all text and copy, or use the Download button below*")
 
-    # Display proposal using st.code which has built-in copy button
-    st.code(st.session_state.proposal, language="text")
+    # Display proposal in a read-only text area for easy copying
+    st.text_area(
+        "Proposal",
+        value=st.session_state.proposal,
+        height=400,
+        disabled=True,
+        label_visibility="collapsed"
+    )
 
     # Action buttons
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.download_button(
-            label="📥 Download Proposal",
-            data=st.session_state.proposal,
-            file_name=f"proposal_{st.session_state.job_data.get('job_id', 'proposal')}.txt",
-            mime="text/plain",
-            use_container_width=True
-        )
+        st.markdown("**How to copy:**\n1. Triple-click the text above\n2. Cmd+C (Mac) or Ctrl+C (Windows/Linux)\n3. Paste into Upwork")
 
     with col2:
-        if st.button("💾 Save as Text", use_container_width=True):
-            proposals_dir = Path(".tmp/proposals")
-            proposals_dir.mkdir(parents=True, exist_ok=True)
-
-            proposal_file = proposals_dir / f"proposal_{st.session_state.job_data.get('job_id', 'proposal')}.txt"
-
-            with open(proposal_file, 'w') as f:
-                f.write(st.session_state.proposal)
-
-            st.success(f"✓ Saved locally")
-
-    with col3:
-        if st.button("🔄 Generate New", use_container_width=True):
-            st.session_state.show_regen_dialog = True
-            st.rerun()
+        col_sub1, col_sub2 = st.columns([1, 1])
+        with col_sub1:
+            if st.button("🔄 Generate New", use_container_width=True):
+                st.session_state.show_regen_dialog = True
+                st.rerun()
+        with col_sub2:
+            st.download_button(
+                label="📥 Download",
+                data=st.session_state.proposal,
+                file_name=f"proposal.txt",
+                mime="text/plain",
+                use_container_width=True
+            )
 
     # Regeneration dialog
     if st.session_state.show_regen_dialog:
